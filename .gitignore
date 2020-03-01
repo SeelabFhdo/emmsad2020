@@ -1,0 +1,7 @@
+.metadata/
+Validation Eclipse 2019-09/
+Reconstructed Models (OLD!)/
+*.project
+static-analyzer/
+releases/
+.~lock*

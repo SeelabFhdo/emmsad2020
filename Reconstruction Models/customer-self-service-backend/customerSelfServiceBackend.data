@@ -1,0 +1,138 @@
+context customerSelfService {
+	structure Address <valueObject> {
+		hide long id <identifier>,
+		immutable string streetAddress,
+		immutable string postalCode,
+		immutable string city
+	}
+
+	structure CustomerId <valueObject> {
+		string id <identifier>,
+		function CustomerId random()
+	}
+
+	structure AddressDto <valueObject> {
+		string streetAddress<neverEmpty>,
+		string postalCode<neverEmpty>,
+		string city<neverEmpty>,
+		function AddressDto create(Address address)
+	}
+
+	list Addresses { AddressDto d }
+
+	structure CustomerIdDto <valueObject> {
+		string id
+	}
+
+	structure CustomerDto <valueObject> {
+		Customers customers
+	}
+
+	list Customers {
+		string customerId,
+		CustomerProfileDto customerProfile
+	}
+
+	structure CustomerProfileDto <valueObject> {
+		string firstname,
+		string lastname,
+		date birthday,
+		AddressDto currentAddress,
+		string email,
+		string phoneNumber,
+		Addresses moveHistory
+	}
+
+	structure CustomerProfileUpdateRequestDto <valueObject> {
+		string firstname<neverEmpty>,
+		string lastname<neverEmpty>,
+		date birthday,
+		string streetAddress<neverEmpty>,
+		string postalCode<neverEmpty>,
+		string city<neverEmpty>,
+		string email<neverEmpty>,
+		string phoneNumber
+	}
+
+	structure CustomerRegistrationRequestDto <valueObject> {
+		string firstname<neverEmpty>,
+		string lastname<neverEmpty>,
+		date birthday,
+		string city<neverEmpty>,
+		string streetAddress<neverEmpty>,
+		string postalCode<neverEmpty>,
+		string phoneNumber
+	}
+
+	structure UserLogin <entity> {
+		long id <identifier>,
+		string authorities,
+		string email,
+		string password,
+		CustomerId customerId
+	}
+
+	structure UserSecurityDetails {
+		boolean accountNonExpired = true,
+		boolean accountNonLocked = true,
+		AuthorityCollection authorities,
+		boolean credentialsNonExpired = true,
+		string email,
+		boolean enabled,
+		long id,
+		string password
+	}
+
+	list AuthorityCollection { string authority }
+
+	structure UserDetailsServiceImpl <domainService> {
+		hide UserLoginRepository userRepository,
+		function UserDetails loadUserByUsername(string email)
+	}
+
+	list UserDetails { string username }
+
+	structure AuthenticationRequestDto <valueObject> {
+		string email,
+		string password
+	}
+
+	structure AuthenticationResponseDto <valueObject> {
+		string email,
+		string token
+	}
+
+	structure SignupRequestDto <valueObject> {
+		string email<neverEmpty>,
+		string password<neverEmpty>
+	}
+
+	structure UserResponseDto <valueObject> {
+		immutable string email,
+		immutable string customerId
+	}
+	
+	structure AuthenticationError {}
+
+	structure CustomerCoreService <infrastructureService> {
+		string customerCoreBaseURL,
+		string apiKeyHeader,
+		string apiKeyValue,
+		function CustomerDto getCustomer(CustomerId customerId),
+		function AddressDto changeAddress(CustomerId customerId, AddressDto requestDto),
+		function CustomerDto createCustomer(CustomerProfileUpdateRequestDto requestDto),
+		function CitiesResponseDto getCitiesForPostalCode(string postalCode)
+	}
+
+	structure UserLoginRepository <repository> {
+		immutable UserLogin login,
+		immutable long id,
+		function UserLogin findByEmail(string email)
+	}
+
+	structure CitiesResponseDto <valueObject> {
+		Cities cities
+	}
+
+	list Cities { string }
+}

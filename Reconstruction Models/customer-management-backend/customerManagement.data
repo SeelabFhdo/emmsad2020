@@ -1,0 +1,108 @@
+context customerManagement {
+	structure CustomerId <valueObject> {
+		string id
+	}
+
+	structure AddressDto <valueObject> {
+		string streetAddress,
+		string postalCode,
+		string city
+	}
+	
+	list Addresses { AddressDto d }
+
+	structure CustomerDto <valueObject> {
+		string customerId,
+		CustomerProfileDto customerProfile
+	}
+
+	list Customers { CustomerDto d }
+
+	structure CustomerProfileDto <valueObject> {
+		string firstname,
+		string lastname,
+		date birthday,
+		AddressDto currentAddress,
+		string email,
+		string phoneNumber,
+		Addresses moveHistory
+	}
+
+	structure CustomersDto <valueObject> {
+		Customers customers
+	}
+
+	structure PaginatedCustomerResponseDto <valueObject> {
+		string filter,
+		int limit,
+		int offset,
+		int size,
+		Customers customers
+	}
+
+	structure MessageDto <valueObject> {
+		string id,
+		date ^date,
+		string customerId,
+		string username <neverEmpty>,
+		string content <neverEmpty>,
+		boolean sentByOperator
+	}
+
+	structure InteractionEntity <entity> {
+		string id <identifier>,
+		date ^date,
+		string content,
+		boolean sentByOperator
+	}
+
+	structure InteractionLogAggregateRoot <entity, aggregate> {
+		immutable string customerId <identifier>,
+		immutable string username,
+		string lastAcknowledgedInteractionId,
+		immutable Interactions interactions,
+
+		function int getNumberOfUnacknowledgedInteractions
+	}
+
+	list Interactions { InteractionEntity i }
+
+	structure InteractionLogService <domainService> {
+		hide InteractionLogRepository interactionLogRepository,
+		function Notifications getNotifications
+	}
+
+	structure Notification <valueObject> {
+		immutable string customerId,
+		immutable string username,
+		immutable int count
+	}
+
+	list Notifications { Notification n }
+
+	structure InteractionAcknowledgementDto <valueObject> {
+		string lastAcknowledgedInteractionId <neverEmpty>
+	}
+
+	structure NotificationDto <valueObject> {
+		string customerId,
+		string username,
+		int count
+	}
+
+	structure CustomerCoreService <infrastructureService> {
+		string customerCoreBaseURL,
+		string apiKeyHeader,
+		string apiKeyValue,
+
+		function CustomerDto getCustomer(CustomerId customerId),
+		function PaginatedCustomerResponseDto getCustomers(string filter, int limit, int offset),
+		function CustomerDto updateCustomer(CustomerId customerId,
+			CustomerProfileDto customerProfile)
+	}
+
+	structure InteractionLogRepository <repository> {
+		immutable InteractionLogAggregateRoot interactionLogAggregateAggregate,
+		immutable string customerId
+	}
+}

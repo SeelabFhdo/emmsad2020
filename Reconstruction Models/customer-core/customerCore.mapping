@@ -1,0 +1,300 @@
+import microservices from "customerCore.services" as customerCoreServices
+import technology from "../technology/java.technology" as java
+import technology from "../technology/eadr.technology" as eadr
+import technology from "../technology/lakesideMutual.technology" as lakesideMutual
+import technology from "../technology/map.technology" as map
+
+@technology(java)
+type customerCoreServices::customerCore::customer.Address {
+	aspects {
+		java::_aspects.Table("addresses");
+	}
+
+	id { aspects { java::_aspects.GeneratedValue; } }
+}
+
+@technology(java)
+type customerCoreServices::customerCore::customer.CustomerId {
+	op random { aspects { java::_aspects.static; } }
+}
+
+@technology(java)
+type customerCoreServices::customerCore::customer.CustomerProfileEntity {
+	currentAddress { aspects { java::_aspects.OneToOne; } }
+
+	moveHistory {
+		aspects {
+			java::_aspects.Collection;
+			java::_aspects.OneToMany;
+		}
+	}
+}
+
+@technology(java)
+@technology(eadr)
+type customerCoreServices::customerCore::customer.CustomerAggregateRoot {
+	aspects { java::_aspects.Table("customers"); }
+
+	id { aspects { java::_aspects.EmbeddedId; } }
+
+	op moveToAddress {
+		aspects {
+			eadr::_aspects.MADR(
+				value = 1,
+				title = "Data transfer between interface layer and domain layer",
+				contextAndProblem = "
+					Need to pass information from the interfaces layer to the domain layer without
+					introducing a layering violation
+				",
+				alternatives = "
+					Pass existing domain objects,
+					Pass the DTOs directly,
+					Pass the components of the DTO,
+					Add a new value type in the domain layer and use it as parameter object
+				",
+				chosenAlternative = "Pass existing domain objects",
+				justification = "
+					This solution doesn't introduce a layering violation and it is simple because it
+					doesn't require any additional classes.
+				"
+			);
+		}
+	}
+}
+
+@technology(java)
+type customerCoreServices::customerCore::customer.CustomerFactory {
+	op formatPhoneNumber { aspects { java::_aspects.static; } }
+}
+
+@technology(java)
+type customerCoreServices::customerCore::customer.CityLookupService {
+	op loadLookupMap {
+		aspects {
+			java::_aspects.Multimap;
+		}
+	}
+	op getLookupMap  {
+		aspects {
+			java::_aspects.Multimap;
+		}
+	}
+}
+
+@technology(map)
+type customerCoreServices::customerCore::customer.AddressDto {
+	aspects { map::_aspects.AtomicParameterList; }
+}
+
+@technology(java, typedef=true)
+@technology(lakesideMutual)
+type customerCoreServices::customerCore::customer.CustomerProfileUpdateRequestDto {
+	birthday { aspects { java::_aspects.JsonFormat("yyyy-MM-dd"); } }
+	phoneNumber { aspects { lakesideMutual::_aspects.PhoneNumber; } }
+}
+
+@technology(java)
+@technology(map)
+type customerCoreServices::customerCore::customer.CustomerResponseDto {
+	aspects {
+		java::_aspects.ResourceSupport;
+		map::_aspects.ParameterTree;
+	}
+
+	moveHistory {
+		aspects {
+			java::_aspects.Collection;
+		}
+	}
+}
+
+@technology(java)
+@technology(map)
+type customerCoreServices::customerCore::customer.CustomersResponseDto {
+	aspects {
+		java::_aspects.ResourceSupport;
+		map::_aspects.ParameterForest;
+	}
+}
+
+@technology(java)
+@technology(map)
+type customerCoreServices::customerCore::customer.PaginatedCustomerResponseDto {
+	aspects {
+		java::_aspects.ResourceSupport;
+		map::_aspects.Pagination;
+	}
+}
+
+@technology(map)
+type customerCoreServices::customerCore::customer.CitiesResponseDto {
+	aspects { map::_aspects.AtomicParameter; }
+}
+
+@technology(java, typedef=true)
+@technology(lakesideMutual)
+type customerCoreServices::customerCore::customer.CustomerService {
+	op getCustomers {
+		return type : lakesideMutual::_types.Page;
+	}
+}
+
+@technology(java)
+@technology(map)
+customerCoreServices::com.lakesidemutual.customercore.CustomerCore {
+	aspects {
+		java::_aspects.ApplicationName("Customer Core");
+		java::_aspects.JacksonConfiguration(INDENT_OUTPUT=true, defaultPropertyInclusion="NON_NULL");
+		java::_aspects.DatasourceConfiguration(
+			url="jdbc:h2:file:./customercore",
+			username="sa",
+			password="sa",
+			driverClassName="org.h2.Driver"
+		);
+		java::_aspects.HibernateConfiguration("create-drop");		
+	}
+	
+	interface cityStaticDataHolder {
+		endpoints {
+			java::_protocols.rest: "/cities";		
+		}
+		
+		aspects {
+			map::_aspects.StaticDataHolder;
+		}
+	}
+	
+	interface customerInformationHolder {
+		endpoints {
+			java::_protocols.rest: "/customers";		
+		}
+		
+		aspects {
+			map::_aspects.InformationHolderResource;
+			map::_aspects.MasterDataHolder;
+		}
+	}
+	
+	referred operation cityStaticDataHolder.changeAddress {
+		endpoints {
+			java::_protocols.rest: "/{customerId}/address";
+		}
+		
+		aspects {
+			java::_aspects.PutMapping;
+		}
+	}
+	
+	operation cityStaticDataHolder.getCitiesForPostalCode {
+		endpoints {
+			java::_protocols.rest: "/{postalCode}";
+		}
+		
+		aspects {
+			java::_aspects.GetMapping;
+		}
+		
+		parameters {
+			primitive postalCode { aspects { java::_aspects.PathVariable; } }
+			complex cities { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+	
+	operation customerInformationHolder.changeAddress {
+		endpoints {
+			java::_protocols.rest: "/{customerId}/address";
+		}
+		
+		aspects {
+			java::_aspects.PutMapping;
+		}
+		
+		parameters {
+			complex customerId { aspects { java::_aspects.PathVariable; } }
+			complex requestDto { aspects { java::_aspects.Valid; java::_aspects.RequestBody; } }
+			complex responseDto { aspects { java::_aspects.ResponseEntity; } }
+			primitive customerNotFound { aspects { java::_aspects.ResponseStatus("NOT_FOUND"); } }
+		}
+	}
+	
+	operation customerInformationHolder.getIncludedFields {
+		parameters {
+			complex result { aspects { java::_aspects.Set; } }			
+		}
+	}
+	
+	operation customerInformationHolder.getCustomer {
+		endpoints {
+			java::_protocols.rest: "/{ids}";
+		}
+		
+		aspects {
+			java::_aspects.GetMapping;
+			map::_aspects.RequestBundle;
+			map::_aspects.WishList;
+		}
+		
+		parameters {
+			primitive ids { aspects { java::_aspects.PathVariable; } }
+			primitive ^fields { aspects { java::_aspects.RequestParam(value="fields"); } }
+			complex customersResponseDto { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+	
+	operation customerInformationHolder.updateCustomer {
+		endpoints {
+			java::_protocols.rest: "/{customerId}";
+		}
+		
+		aspects {
+			java::_aspects.PutMapping;
+		}
+		
+		parameters {
+			complex customerId { aspects { java::_aspects.PathVariable; } }
+			complex requestDto { aspects { java::_aspects.Valid; java::_aspects.RequestBody; } }
+			complex customersResponseDto { aspects {
+				java::_aspects.Valid; java::_aspects.ResponseEntity;
+			} }
+			primitive customerToUpdateNotFound { aspects { 
+				java::_aspects.ResponseStatus("NOT_FOUND");
+			} }
+		}		
+	}
+	
+	operation customerInformationHolder.getCustomers {
+		aspects {
+			java::_aspects.GetMapping;
+		}
+		
+		parameters {
+			primitive filter { aspects { java::_aspects.RequestParam(value="filter"); } }
+			primitive limit { aspects { 
+				java::_aspects.RequestParam(value="limit", defaultValue="10");
+			} }
+			primitive offset { aspects { 
+				java::_aspects.RequestParam(value="offset", defaultValue="0");
+			} }
+			primitive ^fields { aspects { java::_aspects.RequestParam(value="fields"); } }
+			complex customersResponseDto { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+	
+	operation customerInformationHolder.createCustomer {
+		aspects {
+			java::_aspects.PostMapping;
+		}
+		
+		parameters {
+			complex requestDto { aspects { java::_aspects.Valid; java::_aspects.RequestBody; } }
+			primitive limit { aspects { 
+				java::_aspects.RequestParam(value="limit", defaultValue="10");
+			} }
+			primitive offset { aspects { 
+				java::_aspects.RequestParam(value="offset", defaultValue="0");
+			} }
+			primitive ^fields { aspects { java::_aspects.RequestParam(value="fields"); } }
+			complex customersResponseDto { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+}

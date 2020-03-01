@@ -1,0 +1,110 @@
+import datatypes from "customerCore.data" as customerCore
+
+public functional microservice com.lakesidemutual.customercore.CustomerCore {
+	interface cityStaticDataHolder {
+		refers customerInformationHolder.changeAddress;
+		
+		---
+		Get the cities for a particular postal code.
+
+		@required postalCode the postal code
+		---
+		getCitiesForPostalCode(
+			sync postalCode : string,
+			sync out cities : customerCore::customer.CitiesResponseDto
+		);
+	}
+	
+	interface customerInformationHolder {
+		---
+		Change a customer's address.
+
+		@required customerId the customer's unique id
+		@required requestDto the customer's new address
+		---
+		changeAddress(
+			sync customerId : customerCore::customer.CustomerId,
+			sync requestDto : customerCore::customer.AddressDto,
+			sync out responseDto : customerCore::customer.AddressDto,
+			sync out fault customerNotFound : string
+		);
+		
+		internal getIncludedFields(
+			sync ^fields : string,
+			sync out result : customerCore::customer.FieldNames
+		);
+		
+		internal createCustomerResponseDto(
+			sync customer : customerCore::customer.CustomerAggregateRoot,
+			sync ^fields : string,
+			sync out customerResponseDto : customerCore::customer.CustomerResponseDto
+		);
+		
+		internal createPaginatedCustomerResponseDto(
+			sync filter : string,
+			sync limit : int,
+			sync offset : int,
+			sync size : int,
+			sync ^fields : string,
+			sync customerDtos : customerCore::customer.CustomerResponses,
+			sync out responseDto : customerCore::customer.PaginatedCustomerResponseDto
+		);
+		
+		---
+		Get a specific set of customers.
+
+		@required ids a comma-separated list of customer ids
+		@param ^fields a comma-separated list of the fields that should be included in the response
+		---
+		getCustomer(
+			sync ids : string,
+			sync ^fields? : string,
+			sync out customersResponseDto : customerCore::customer.CustomerResponseDto
+		);
+		
+		---
+		Update the profile of the customer with the given customer id.
+
+		@required customerId the customer's unique id
+		@required requestDto the customer's updated profile
+		---
+		updateCustomer(
+			sync customerId : customerCore::customer.CustomerId,
+			sync requestDto : customerCore::customer.CustomerProfileUpdateRequestDto,
+			sync out customersResponseDto : customerCore::customer.CustomerResponseDto,
+			sync out fault customerToUpdateNotFound : string
+		);
+		
+		---
+		Get all customers in pages of 10 entries per page.
+
+		@param filter search terms to filter the customers by name
+		@param limit the maximum number of customers per page
+		@param offset the offset of the page's first customer
+		@param ^fields a comma-separated list of the fields that should be included in the response
+		---
+		getCustomers(
+			sync filter? : string,
+			sync limit? : int,
+			sync offset? : int,
+			sync ^fields? : string,
+			sync out customersResponseDto : customerCore::customer.PaginatedCustomerResponseDto
+		);
+		
+		---
+		Create a new customer.
+
+		@required requestDto the customer's profile information
+		@param limit the maximum number of customers per page
+		@param offset the offset of the page's first customer
+		@param ^fields a comma-separated list of the fields that should be included in the response
+		---
+		createCustomer(
+			sync requestDto : customerCore::customer.CustomerProfileUpdateRequestDto,
+			sync limit? : int,
+			sync offset? : int,
+			sync ^fields? : string,
+			sync out customersResponseDto : customerCore::customer.CustomerResponseDto
+		);
+	}
+}

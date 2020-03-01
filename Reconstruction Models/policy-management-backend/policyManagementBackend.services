@@ -1,0 +1,165 @@
+import datatypes from "policyManagementBackend.data" as policyManagementBackend
+import microservices from "../customer-core/customerCore.services" as customerCoreServices
+
+functional microservice com.lakesidemutual.policymanagement.PolicyManagementBackend {
+	required microservices {
+		customerCoreServices::com.lakesidemutual.customercore.CustomerCore
+	}
+	interface customerInformationHolder {
+		---
+		Get all customers
+
+		@param filter search terms to filter the customers by name
+		@param limit the maximum number of customers per page
+		@param offset the offset of the page's first customer
+		---
+		getCustomers(
+			sync filter? : string,
+			sync limit? : int,
+			sync offset? : int,
+			sync out paginatedResponseOut
+				: policyManagementBackend::policyManagement.PaginatedCustomerResponseDto
+		);
+
+		internal createPaginatedCustomerResponseDto(
+			sync filter : string,
+			sync limit : int,
+			sync offset : int,
+			sync size : int,
+			sync customerDtos : policyManagementBackend::policyManagement.Customers,
+			sync out paginatedCustomerResponseDto
+				: policyManagementBackend::policyManagement.PaginatedCustomerResponseDto
+		);
+
+		---
+		Get customer with a given customer id.
+
+		@required customerIdDto the customer's unique id
+		---
+		getCustomer(
+			sync customerIdDto : policyManagementBackend::policyManagement.CustomerIdDto,
+			sync out customer : policyManagementBackend::policyManagement.CustomerDto,
+			sync out fault customerNotFound : string
+		);
+
+		---
+		Get a customer's policy history.
+
+		@required customerIdDto the customer's unique id
+		@param expand a comma-separated list of the fields that should be expanded in the response
+		---
+		getPolicyHistory(
+			sync customerIdDto : policyManagementBackend::policyManagement.CustomerIdDto,
+			sync expand? : string,
+			sync out policyDtos : policyManagementBackend::policyManagement.Policies
+		);
+
+		---
+		Get a customer's active policy.
+
+		@required customerIdDto the customer's unique id
+		@param expand a comma-separated list of the fields that should be expanded in the response
+		---
+		getActivePolicy(
+			sync customerIdDto : policyManagementBackend::policyManagement.CustomerIdDto,
+			sync expand? : string,
+			sync out policyDto : policyManagementBackend::policyManagement.PolicyDto
+		);
+
+		internal createPolicyDto(
+			sync policy : policyManagementBackend::policyManagement.PolicyAggregateRoot,
+			sync expand : string,
+			sync out policyDto : policyManagementBackend::policyManagement.PolicyDto
+		);
+	}
+
+	interface policyInformationHolder {
+		---
+		Create a new policy.
+
+		@required createPolicyDto the policy that is to be added
+		---
+		createPolicy(
+			sync createPolicyDto : policyManagementBackend::policyManagement.CreatePolicyRequestDto,
+			sync request : policyManagementBackend::policyManagement.HttpRequest,
+			sync out policyDto : policyManagementBackend::policyManagement.PolicyDto,
+			sync out fault customerNotFound : string
+		);
+
+		internal createPolicyDtos(
+			sync policies : policyManagementBackend::policyManagement.Policies,
+			sync expand : string,
+			sync result : policyManagementBackend::policyManagement.Policies
+		);
+
+		internal createPaginatedPolicyResponseDto(
+			sync limit : int,
+			sync offset : int,
+			sync expand : string,
+			sync szie : int,
+			sync policyDtos : policyManagementBackend::policyManagement.Policies,
+			sync out paginatedPolicyResponseDto
+				: policyManagementBackend::policyManagement.PaginatedPolicyResponseDto
+		);
+
+		---
+		Get all policies, newest first.
+
+		@param limit the maximum number of policies per page
+		@param offset the offset of the page's first policy
+		@param expand a comma-separated list of the fields that should be expanded in the response
+		---
+		getPolicies(
+			sync limit? : int,
+			sync offset? : int,
+			sync expand? : string,
+			sync out paginatedPolicyResponse
+				: policyManagementBackend::policyManagement.PaginatedPolicyResponseDto
+		);
+
+		---
+		Get a single policy.
+
+		@required policyId the policy's unique id
+		@param expand a comma-separated list of the fields that should be expanded in the response
+		---
+		getPolicy(
+			sync policyId : policyManagementBackend::policyManagement.PolicyId,
+			sync expand? : string,
+			sync out response : policyManagementBackend::policyManagement.PolicyDto
+		);
+	}
+
+	interface riskComputation {
+		---
+		Computes the risk factor for a given customer.
+
+		@required riskFactorRequest the request containing relevant customer attributes (e.g.,
+									postal code, birthday)
+		---
+		computeRiskFactor(
+			sync riskFactorRequest : policyManagementBackend::policyManagement.RiskFactorRequestDto
+		);
+
+		internal getAge(
+			sync birthday : date,
+			sync out age : int
+		);
+
+		internal doRiskFactorComputation(
+			sync age : int,
+			sync postalCode : string,
+			sync out factor : int
+		);
+
+		internal computeAgeGroupRiskFactor(
+			sync age : int,
+			sync out factor : int
+		);
+
+		internal computeLocalityRiskFactor(
+			sync postalCodeStr : string,
+			sync out factor : int
+		);
+	}
+}

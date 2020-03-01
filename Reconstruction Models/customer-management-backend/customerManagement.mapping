@@ -1,0 +1,200 @@
+import microservices from "customerManagement.services" as managementServices
+import technology from "../technology/java.technology" as java
+import technology from "../technology/map.technology" as map
+
+@technology(java)
+type managementServices::customerManagement::customerManagement.CustomerDto {
+	aspects { java::_aspects.ResourceSupport; }
+
+	customerProfile { aspects { java::_aspects.JsonUnwrapped; } }
+}
+
+@technology(java)
+type managementServices::customerManagement::customerManagement.CustomerProfileDto {
+	currentAddress { aspects { java::_aspects.JsonUnwrapped; } }
+}
+
+@technology(java)
+type managementServices::customerManagement::customerManagement.CustomersDto {
+	aspects { java::_aspects.ResourceSupport; }
+}
+
+@technology(java)
+type managementServices::customerManagement::customerManagement.PaginatedCustomerResponseDto {
+	aspects { java::_aspects.ResourceSupport; }
+}
+
+@technology(java)
+type managementServices::customerManagement::customerManagement.InteractionEntity {
+	aspects {
+		java::_aspects.Table("interactions");
+	}
+}
+
+@technology(java)
+type managementServices::customerManagement::customerManagement.InteractionLogAggregateRoot {
+	aspects {
+		java::_aspects.Table("interactionlogs");
+	}
+
+	interactions {
+		aspects {
+			java::_aspects.Collection;
+			java::_aspects.OneToMany(fetch="EAGER");
+		}
+	}
+}
+
+@technology(java)
+type managementServices::customerManagement::customerManagement.CustomerCoreService {
+	customerCoreBaseURL { aspects { java::_aspects.Value("${customercore.baseURL}"); } }
+	apiKeyHeader { aspects { java::_aspects.Value("${apikey.header}"); } }
+	apiKeyValue { aspects { java::_aspects.Value("${apikey.value}"); } }
+
+	op updateCustomer {
+		return type { aspects { java::_aspects.ResponseEntity; } }
+	}
+}
+
+@technology(java)
+@technology(map)
+managementServices::com.lakesidemutual.customermanagement.CustomerManagement {
+	aspects {
+		java::_aspects.ApplicationName("Customer Management Backend");
+		java::_aspects.JacksonConfiguration(INDENT_OUTPUT=true, defaultPropertyInclusion="NON_NULL");
+		java::_aspects.DatasourceConfiguration(
+			url="jdbc:h2:file:./customermanagement",
+			username="sa",
+			password="sa",
+			driverClassName="org.h2.Driver"
+		);
+		java::_aspects.HibernateConfiguration("create-drop");
+		java::_aspects.CustomProperty(name="customercore.baseURL", value="http://localhost:8110");
+	}
+	
+	interface customerInformationHolder {
+		endpoints {
+			java::_protocols.rest: "/customers";
+		}
+		
+		aspects {
+			map::_aspects.InformationHolderResource;
+			map::_aspects.MasterDataHolder;
+		}
+	}
+	
+	interface interactionLogInformationHolder {
+		endpoints {
+			java::_protocols.rest: "/interaction-logs";
+		}
+		
+		aspects {
+			map::_aspects.InformationHolderResource;
+			map::_aspects.MasterDataHolder;
+		}
+	}
+	
+	interface notificationInformationHolder {
+		endpoints {
+			java::_protocols.rest: "/notifications";
+		}
+	}
+	
+	operation customerInformationHolder.getCustomers {
+		aspects {
+			java::_aspects.GetMapping;
+		}
+		
+		parameters {
+			primitive filter { aspects { java::_aspects.RequestParam(value="filter"); } }
+			primitive limit { aspects { 
+				java::_aspects.RequestParam(value="limit", defaultValue="10");
+			} }
+			primitive offset { aspects { 
+				java::_aspects.RequestParam(value="offset", defaultValue="0");
+			} }
+			complex customers { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+	
+	operation customerInformationHolder.getCustomer {
+		endpoints {
+			java::_protocols.rest: "/{customerId}";
+		}
+		
+		aspects {
+			java::_aspects.GetMapping;
+		}
+		
+		parameters {
+			complex customerId { aspects { java::_aspects.PathVariable; } }
+			complex customer { aspects { java::_aspects.ResponseEntity; } }
+			primitive customerNotFound { aspects { java::_aspects.ResponseStatus("NOT_FOUND"); } }
+		}
+	}
+	
+	operation customerInformationHolder.updateCustomer {
+		endpoints {
+			java::_protocols.rest: "/{customerId}";
+		}
+		
+		aspects {
+			java::_aspects.PutMapping;
+		}
+		
+		parameters {
+			complex customerId { aspects { java::_aspects.PathVariable; } }
+			complex customerProfile { aspects { 
+				java::_aspects.Valid;
+				java::_aspects.RequestBody;
+			} }
+			complex customer { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+	
+	operation interactionLogInformationHolder.getInteractionLog {
+		endpoints {
+			java::_protocols.rest: "/{customerId}";
+		}
+		
+		aspects {
+			java::_aspects.GetMapping;
+		}
+		
+		parameters {
+			complex customerId { aspects { java::_aspects.PathVariable; } }
+			complex interactionLog { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+	
+	operation interactionLogInformationHolder.acknowledgeInteractions {
+		endpoints {
+			java::_protocols.rest: "/{customerId}";
+		}
+		
+		parameters {
+			complex customerId { aspects { java::_aspects.PathVariable; } }
+			complex interactionAcknowledgementDto { aspects {
+				java::_aspects.Valid;
+				java::_aspects.RequestBody;
+			} }
+			complex interactionLog { aspects { java::_aspects.ResponseEntity; } }
+			primitive InteractionLogNotFound { aspects {
+				java::_aspects.ResponseStatus("NOT_FOUND");
+			} }
+		}
+	}
+
+	operation notificationInformationHolder.getNotifications {
+		aspects {
+			java::_aspects.GetMapping;
+		}
+	}
+	
+	operation messageProcessor.processMessage {
+		aspects {
+			java::_aspects.MessageMapping("/chat/messages");
+			java::_aspects.SendTo("/topic/messages");
+		}
+	}
+}

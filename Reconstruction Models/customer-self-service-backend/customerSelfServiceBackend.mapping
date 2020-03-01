@@ -1,0 +1,234 @@
+import microservices from "customerSelfServiceBackend.services" as selfServiceBackendServices
+import technology from "../technology/java.technology" as java
+import technology from "../technology/map.technology" as map
+import technology from "../technology/lakesideMutual.technology" as lakesideMutual
+
+@technology(java)
+type selfServiceBackendServices::customerSelfServiceBackend::customerSelfService.Address {
+	aspects { java::_aspects.Table("addresses"); }
+}
+
+@technology(java)
+type selfServiceBackendServices::customerSelfServiceBackend::customerSelfService.CustomerId {
+	aspects { java::_aspects.Embeddable; }
+
+	op random { aspects { java::_aspects.static; } }
+}
+
+@technology(java)
+type selfServiceBackendServices::customerSelfServiceBackend::customerSelfService.UserLogin {
+	aspects { java::_aspects.Table("user_logins"); }
+
+	customerId {
+		aspects {
+			java::_aspects.Embedded;
+			java::_aspects.AttributeOverrideColumn(name="id", column="customerId");
+		}
+	}
+}
+
+@technology(java)
+type selfServiceBackendServices::customerSelfServiceBackend::customerSelfService.UserSecurityDetails {
+	aspects { java::_aspects.UserDetails; }
+
+	accountNonExpired { aspects { java::_aspects.JsonIgnore; } }
+	accountNonLocked { aspects { java::_aspects.JsonIgnore; } }
+	authorities : java::_types.GrantedAuthorities;
+	credentialsNonExpired { aspects { java::_aspects.JsonIgnore; } }
+	enabled { aspects { java::_aspects.JsonIgnore; } }
+	password { aspects { java::_aspects.JsonIgnore; } }
+}
+
+@technology(java)
+type selfServiceBackendServices::customerSelfServiceBackend::customerSelfService.UserDetailsServiceImpl {
+	op loadUserByUsername {
+		return type { aspects { java::_aspects.UserDetails; } }
+	}
+}
+
+@technology(java)
+type selfServiceBackendServices::customerSelfServiceBackend::customerSelfService.CustomerCoreService {
+	customerCoreBaseURL { aspects { java::_aspects.Value("${customercore.baseURL}"); } }
+	apiKeyHeader { aspects { java::_aspects.Value("${apikey.header}"); } }
+	apiKeyValue { aspects { java::_aspects.Value("${apikey.value}"); } }
+
+	op changeAddress {
+		return type { aspects { java::_aspects.ResponseEntity; } }
+	}
+
+	op getCitiesForPostalCode {
+		return type { aspects { java::_aspects.ResponseEntity; } }
+	}
+}
+
+@technology(java)
+type selfServiceBackendServices::customerSelfServiceBackend::customerSelfService.AddressDto {
+	op create { aspects { java::_aspects.static; } }
+}
+
+@technology(java)
+type selfServiceBackendServices::customerSelfServiceBackend::customerSelfService.CustomerProfileDto {
+	currentAddress { aspects { java::_aspects.JsonUnwrapped; } }
+}
+
+@technology(java, typedef=true)
+@technology(lakesideMutual)
+type selfServiceBackendServices::customerSelfServiceBackend
+	::customerSelfService.CustomerProfileUpdateRequestDto {
+	birthday { aspects { java::_aspects.JsonFormat("yyyy-MM-dd"); } }
+	email { aspects { java::_aspects.Email; } }
+	phoneNumber { aspects { lakesideMutual::_aspects.PhoneNumber; } }
+}
+
+@technology(java, typedef=true)
+@technology(lakesideMutual)
+type selfServiceBackendServices::customerSelfServiceBackend
+	::customerSelfService.CustomerRegistrationRequestDto {
+	birthday { aspects { java::_aspects.JsonFormat("yyyy-MM-dd"); } }
+	phoneNumber { aspects { lakesideMutual::_aspects.PhoneNumber; } }
+}
+
+@technology(java)
+type selfServiceBackendServices::customerSelfServiceBackend::customerSelfService.SignupRequestDto {
+	email { aspects { java::_aspects.Email; } }
+}
+
+@technology(java)
+@technology(map)
+selfServiceBackendServices::com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend {
+	aspects {
+		java::_aspects.ApplicationName("Customer Self-Service Backend");
+		java::_aspects.JacksonConfiguration(INDENT_OUTPUT=true, defaultPropertyInclusion="NON_NULL");
+		java::_aspects.DatasourceConfiguration(
+			url="jdbc:h2:file:./customerselfservice",
+			username="sa",
+			password="sa",
+			driverClassName="org.h2.Driver"
+		);
+		java::_aspects.HibernateConfiguration("create-drop");
+		java::_aspects.CustomProperty(name="customercore.baseURL", value="http://localhost:8110");
+	}
+	
+	interface authenticationController {
+		endpoints {
+			java::_protocols.rest: "/auth";
+		}
+	}
+	
+	interface cityStaticDataHolder {
+		endpoints {
+			java::_protocols.rest: "/cities";
+		}
+	}
+	
+	interface customerInformationHolder {
+		endpoints {
+			java::_protocols.rest: "/customers";
+		}
+	}
+	
+	interface userInformationHolder {
+		endpoints {
+			java::_protocols.rest: "/user";
+		}
+		
+		aspects {
+			map::_aspects.InformationHolderResource;
+			map::_aspects.MasterDataHolder;
+		}
+	}
+	
+	operation authenticationController.authenticationRequest {
+		aspects {
+			java::_aspects.PostMapping;
+		}
+		
+		parameters {
+			complex authenticationRequest { aspects { java::_aspects.RequestBody; } }
+			complex authenticationResponse { aspects { java::_aspects.ResponseEntity; } }
+			complex authenticationException : java::_types.AuthenticationException;
+		}
+	}
+	
+	operation authenticationController.signupUser {
+		endpoints {
+			java::_protocols.rest: "/signup";
+		}
+		
+		aspects {
+			java::_aspects.PostMapping;
+		}
+		
+		parameters {
+			complex registration { aspects { java::_aspects.Valid; java::_aspects.RequestBody; } }
+			complex userResponse { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+	
+	operation cityStaticDataHolder.getCitiesForPostalCode {
+		endpoints {
+			java::_protocols.rest: "/{postalCode}";
+		}
+		
+		aspects {
+			java::_aspects.GetMapping;
+		}
+		
+		parameters {
+			primitive postcalCode { aspects { java::_aspects.PathVariable; } }
+			complex result { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+	
+	operation customerInformationHolder.changeAddress {
+		endpoints {
+			java::_protocols.rest: "/{customerId}/address";
+		}
+		
+		aspects {
+			java::_aspects.PutMapping;
+		}
+		
+		parameters {
+			complex customerId { aspects { java::_aspects.PathVariable; } }
+			complex requestDto { aspects { java::_aspects.RequestBody; java::_aspects.Valid; } }
+		}
+	}
+	
+	operation customerInformationHolder.getCustomer {
+		endpoints {
+			java::_protocols.rest: "/{customerId}";
+		}
+		
+		aspects {
+			java::_aspects.GetMapping;
+		}
+		
+		parameters {
+			complex customerId { aspects { java::_aspects.PathVariable; } }
+			complex result { aspects { java::_aspects.ResponseEntity; } }
+			primitive customerNotFound { aspects { java::_aspects.ResponseStatus("NOT_FOUND"); } }
+		}
+	}
+	
+	operation customerInformationHolder.registerCustomer {
+		aspects {
+			java::_aspects.PostMapping;
+		}
+		
+		parameters {
+			complex requestDto { aspects { java::_aspects.Valid; java::_aspects.RequestBody; } }
+			complex result { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+	
+	operation userInformationHolder.getCurrentUser {
+		aspects {
+			java::_aspects.GetMapping;
+		}
+		
+		parameters {
+			complex response { aspects { java::_aspects.ResponseEntity; } }
+		}
+	}
+}

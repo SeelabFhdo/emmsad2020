@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file:///home/florian/Dokumente/Forschung/Paper/Eigene/EMMSAD 2020/validation/Reconstruction Models/customer-self-service-backend/customerSelfServiceBackend.data">
+  <contexts name="customerSelfService" qualifiedName="customerSelfService">
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="Address" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.Address">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="id" qualifiedName="customerSelfService.Address.id" hidden="true">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="streetAddress" qualifiedName="customerSelfService.Address.streetAddress" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="postalCode" qualifiedName="customerSelfService.Address.postalCode" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="city" qualifiedName="customerSelfService.Address.city" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerId">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <operations name="random" qualifiedName="customerSelfService.CustomerId.random">
+        <returnType>
+          <type xsi:type="intermediate:IntermediateComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerId"/>
+        </returnType>
+      </operations>
+      <dataFields name="id" qualifiedName="customerSelfService.CustomerId.id">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AddressDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <operations name="create" qualifiedName="customerSelfService.AddressDto.create">
+        <returnType>
+          <type xsi:type="intermediate:IntermediateComplexType" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AddressDto"/>
+        </returnType>
+        <parameters name="address" qualifiedName="customerSelfService.AddressDto.create.address">
+          <type xsi:type="intermediate:IntermediateComplexType" name="Address" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.Address"/>
+        </parameters>
+      </operations>
+      <dataFields name="streetAddress" qualifiedName="customerSelfService.AddressDto.streetAddress">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="postalCode" qualifiedName="customerSelfService.AddressDto.postalCode">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="city" qualifiedName="customerSelfService.AddressDto.city">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerIdDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerIdDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="id" qualifiedName="customerSelfService.CustomerIdDto.id">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="customers" qualifiedName="customerSelfService.CustomerDto.customers">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Customers" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.Customers"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerProfileDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerProfileDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="firstname" qualifiedName="customerSelfService.CustomerProfileDto.firstname">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastname" qualifiedName="customerSelfService.CustomerProfileDto.lastname">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="birthday" qualifiedName="customerSelfService.CustomerProfileDto.birthday">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="currentAddress" qualifiedName="customerSelfService.CustomerProfileDto.currentAddress">
+        <type xsi:type="intermediate:IntermediateComplexType" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AddressDto"/>
+      </dataFields>
+      <dataFields name="email" qualifiedName="customerSelfService.CustomerProfileDto.email">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="phoneNumber" qualifiedName="customerSelfService.CustomerProfileDto.phoneNumber">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="moveHistory" qualifiedName="customerSelfService.CustomerProfileDto.moveHistory">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Addresses" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.Addresses"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerProfileUpdateRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="firstname" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto.firstname">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastname" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto.lastname">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="birthday" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto.birthday">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="streetAddress" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto.streetAddress">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="postalCode" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto.postalCode">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="city" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto.city">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="email" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto.email">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="phoneNumber" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto.phoneNumber">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerRegistrationRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerRegistrationRequestDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="firstname" qualifiedName="customerSelfService.CustomerRegistrationRequestDto.firstname">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastname" qualifiedName="customerSelfService.CustomerRegistrationRequestDto.lastname">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="birthday" qualifiedName="customerSelfService.CustomerRegistrationRequestDto.birthday">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="city" qualifiedName="customerSelfService.CustomerRegistrationRequestDto.city">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="streetAddress" qualifiedName="customerSelfService.CustomerRegistrationRequestDto.streetAddress">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="postalCode" qualifiedName="customerSelfService.CustomerRegistrationRequestDto.postalCode">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="phoneNumber" qualifiedName="customerSelfService.CustomerRegistrationRequestDto.phoneNumber">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="UserLogin" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserLogin">
+      <featureNames>ENTITY</featureNames>
+      <dataFields name="id" qualifiedName="customerSelfService.UserLogin.id">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="authorities" qualifiedName="customerSelfService.UserLogin.authorities">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="email" qualifiedName="customerSelfService.UserLogin.email">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="password" qualifiedName="customerSelfService.UserLogin.password">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="customerId" qualifiedName="customerSelfService.UserLogin.customerId">
+        <type xsi:type="intermediate:IntermediateComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerId"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="UserSecurityDetails" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserSecurityDetails">
+      <dataFields name="accountNonExpired" qualifiedName="customerSelfService.UserSecurityDetails.accountNonExpired" initializationValue="true">
+        <initializationValueCompatibleTypes name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+      </dataFields>
+      <dataFields name="accountNonLocked" qualifiedName="customerSelfService.UserSecurityDetails.accountNonLocked" initializationValue="true">
+        <initializationValueCompatibleTypes name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+      </dataFields>
+      <dataFields name="authorities" qualifiedName="customerSelfService.UserSecurityDetails.authorities">
+        <type xsi:type="intermediate:IntermediateComplexType" name="AuthorityCollection" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.AuthorityCollection"/>
+      </dataFields>
+      <dataFields name="credentialsNonExpired" qualifiedName="customerSelfService.UserSecurityDetails.credentialsNonExpired" initializationValue="true">
+        <initializationValueCompatibleTypes name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+      </dataFields>
+      <dataFields name="email" qualifiedName="customerSelfService.UserSecurityDetails.email">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="enabled" qualifiedName="customerSelfService.UserSecurityDetails.enabled">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+      </dataFields>
+      <dataFields name="id" qualifiedName="customerSelfService.UserSecurityDetails.id">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="password" qualifiedName="customerSelfService.UserSecurityDetails.password">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="UserDetailsServiceImpl" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserDetailsServiceImpl">
+      <featureNames>DOMAIN_SERVICE</featureNames>
+      <operations name="loadUserByUsername" qualifiedName="customerSelfService.UserDetailsServiceImpl.loadUserByUsername">
+        <returnType>
+          <type xsi:type="intermediate:IntermediateComplexType" name="UserDetails" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.UserDetails"/>
+        </returnType>
+        <parameters name="email" qualifiedName="customerSelfService.UserDetailsServiceImpl.loadUserByUsername.email">
+          <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+      </operations>
+      <dataFields name="userRepository" qualifiedName="customerSelfService.UserDetailsServiceImpl.userRepository" hidden="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="UserLoginRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserLoginRepository"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="AuthenticationRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AuthenticationRequestDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="email" qualifiedName="customerSelfService.AuthenticationRequestDto.email">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="password" qualifiedName="customerSelfService.AuthenticationRequestDto.password">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="AuthenticationResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AuthenticationResponseDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="email" qualifiedName="customerSelfService.AuthenticationResponseDto.email">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="token" qualifiedName="customerSelfService.AuthenticationResponseDto.token">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="SignupRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.SignupRequestDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="email" qualifiedName="customerSelfService.SignupRequestDto.email">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="password" qualifiedName="customerSelfService.SignupRequestDto.password">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="UserResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserResponseDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="email" qualifiedName="customerSelfService.UserResponseDto.email" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="customerId" qualifiedName="customerSelfService.UserResponseDto.customerId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="AuthenticationError" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AuthenticationError"/>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerCoreService" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerCoreService">
+      <featureNames>INFRASTRUCTURE_SERVICE</featureNames>
+      <operations name="getCustomer" qualifiedName="customerSelfService.CustomerCoreService.getCustomer">
+        <returnType>
+          <type xsi:type="intermediate:IntermediateComplexType" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerDto"/>
+        </returnType>
+        <parameters name="customerId" qualifiedName="customerSelfService.CustomerCoreService.getCustomer.customerId">
+          <type xsi:type="intermediate:IntermediateComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerId"/>
+        </parameters>
+      </operations>
+      <operations name="changeAddress" qualifiedName="customerSelfService.CustomerCoreService.changeAddress">
+        <returnType>
+          <type xsi:type="intermediate:IntermediateComplexType" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AddressDto"/>
+        </returnType>
+        <parameters name="customerId" qualifiedName="customerSelfService.CustomerCoreService.changeAddress.customerId">
+          <type xsi:type="intermediate:IntermediateComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerId"/>
+        </parameters>
+        <parameters name="requestDto" qualifiedName="customerSelfService.CustomerCoreService.changeAddress.requestDto">
+          <type xsi:type="intermediate:IntermediateComplexType" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AddressDto"/>
+        </parameters>
+      </operations>
+      <operations name="createCustomer" qualifiedName="customerSelfService.CustomerCoreService.createCustomer">
+        <returnType>
+          <type xsi:type="intermediate:IntermediateComplexType" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerDto"/>
+        </returnType>
+        <parameters name="requestDto" qualifiedName="customerSelfService.CustomerCoreService.createCustomer.requestDto">
+          <type xsi:type="intermediate:IntermediateComplexType" name="CustomerProfileUpdateRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerProfileUpdateRequestDto"/>
+        </parameters>
+      </operations>
+      <operations name="getCitiesForPostalCode" qualifiedName="customerSelfService.CustomerCoreService.getCitiesForPostalCode">
+        <returnType>
+          <type xsi:type="intermediate:IntermediateComplexType" name="CitiesResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CitiesResponseDto"/>
+        </returnType>
+        <parameters name="postalCode" qualifiedName="customerSelfService.CustomerCoreService.getCitiesForPostalCode.postalCode">
+          <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+      </operations>
+      <dataFields name="customerCoreBaseURL" qualifiedName="customerSelfService.CustomerCoreService.customerCoreBaseURL">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="apiKeyHeader" qualifiedName="customerSelfService.CustomerCoreService.apiKeyHeader">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="apiKeyValue" qualifiedName="customerSelfService.CustomerCoreService.apiKeyValue">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="UserLoginRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserLoginRepository">
+      <featureNames>REPOSITORY</featureNames>
+      <operations name="findByEmail" qualifiedName="customerSelfService.UserLoginRepository.findByEmail">
+        <returnType>
+          <type xsi:type="intermediate:IntermediateComplexType" name="UserLogin" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserLogin"/>
+        </returnType>
+        <parameters name="email" qualifiedName="customerSelfService.UserLoginRepository.findByEmail.email">
+          <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+      </operations>
+      <dataFields name="login" qualifiedName="customerSelfService.UserLoginRepository.login" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="UserLogin" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserLogin"/>
+      </dataFields>
+      <dataFields name="id" qualifiedName="customerSelfService.UserLoginRepository.id" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CitiesResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CitiesResponseDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="cities" qualifiedName="customerSelfService.CitiesResponseDto.cities">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Cities" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.Cities"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="Addresses" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.Addresses" structuredList="true">
+      <dataFields name="d" qualifiedName="customerSelfService.Addresses.d">
+        <type xsi:type="intermediate:IntermediateComplexType" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AddressDto"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="Customers" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.Customers" structuredList="true">
+      <dataFields name="customerId" qualifiedName="customerSelfService.Customers.customerId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="customerProfile" qualifiedName="customerSelfService.Customers.customerProfile">
+        <type xsi:type="intermediate:IntermediateComplexType" name="CustomerProfileDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerProfileDto"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="AuthorityCollection" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.AuthorityCollection" structuredList="true">
+      <dataFields name="authority" qualifiedName="customerSelfService.AuthorityCollection.authority">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="UserDetails" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.UserDetails" structuredList="true">
+      <dataFields name="username" qualifiedName="customerSelfService.UserDetails.username">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="Cities" origin="DATA_MODEL" kind="LIST" qualifiedName="customerSelfService.Cities" primitiveList="true">
+      <primitiveType name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+    </complexTypes>
+  </contexts>
+</intermediate:IntermediateDataModel>

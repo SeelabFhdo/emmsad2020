@@ -1,0 +1,91 @@
+import datatypes from "customerManagement.data" as customerManagement
+import microservices from "../customer-core/customerCore.services" as customerCoreServices
+
+public functional microservice com.lakesidemutual.customermanagement.CustomerManagement {
+	required microservices {
+		customerCoreServices::com.lakesidemutual.customercore.CustomerCore
+	}
+
+	interface customerInformationHolder {
+		---
+		Get all customers.
+
+		@param filter search terms to filter the customers by name
+		@param limit the maximum number of customers per page
+		@param offset the offset of the page's first customer
+		---
+		getCustomers(
+			sync filter? : string,
+			sync limit? : int,
+			sync offset? : int,
+			sync out customers : customerManagement::customerManagement.PaginatedCustomerResponseDto
+		);
+
+		---
+		Get customer with a given customer id.
+
+		@required customerId the customer's unique id
+		---
+		getCustomer(
+			sync customerId : customerManagement::customerManagement.CustomerId,
+			sync out customer : customerManagement::customerManagement.CustomerDto,
+			sync out fault customerNotFound : string
+		);
+
+		---
+		Update the profile of the customer with the given customer id
+
+		@required customerId the customer's unique id
+		@required customerProfile the customer's updated profile
+		---
+		updateCustomer(
+			sync customerId : customerManagement::customerManagement.CustomerId,
+			sync customerProfile : customerManagement::customerManagement.CustomerProfileDto,
+			sync out customer : customerManagement::customerManagement.CustomerDto
+		);
+	}
+
+	interface interactionLogInformationHolder {
+		---
+		Get the interaction log for a customer with a given customer id.
+
+		@required customerId the customer's unique id
+		---
+		getInteractionLog(
+			sync customerId : customerManagement::customerManagement.CustomerId,
+			sync out interactionLog
+				: customerManagement::customerManagement.InteractionLogAggregateRoot
+		);
+
+		---
+		Acknowledge all of a given customer's interactions up to the given interaction id.
+
+		@required customerId the customer's unique id
+		@required interactionAcknowledgementDto the id of the newest acknowledged interaction
+		---
+		acknowledgeInteractions(
+			sync customerId : customerManagement::customerManagement.CustomerId,
+			sync interactionAcknowledgementDto
+				: customerManagement::customerManagement.InteractionAcknowledgementDto,
+			sync out interactionLog
+				: customerManagement::customerManagement.InteractionLogAggregateRoot,
+			sync out fault InteractionLogNotFound : string
+		);
+	}
+
+	interface notificationInformationHolder {
+		---
+		Get a list of all unacknowledged notifications.
+		---
+		getNotifications(
+			sync out notifications : customerManagement::customerManagement.Notifications
+		);
+	}
+	
+	interface messageProcessor {
+		processMessage(
+			sync message : customerManagement::customerManagement.MessageDto,
+			sync out broadcastMessage : customerManagement::customerManagement.MessageDto
+		);
+	}
+}

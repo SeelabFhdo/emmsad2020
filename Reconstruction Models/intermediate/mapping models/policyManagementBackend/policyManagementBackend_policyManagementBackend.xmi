@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file:///home/florian/Dokumente/Forschung/Paper/Eigene/EMMSAD 2020/validation/Reconstruction Models/policy-management-backend/policyManagementBackend.data">
+  <imports name="java" importUri="file:///home/florian/Dokumente/Forschung/Paper/Eigene/EMMSAD 2020/validation/Reconstruction Models/technology/java.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="eadr" importUri="file:///home/florian/Dokumente/Forschung/Paper/Eigene/EMMSAD 2020/validation/Reconstruction Models/technology/eadr.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="map" importUri="file:///home/florian/Dokumente/Forschung/Paper/Eigene/EMMSAD 2020/validation/Reconstruction Models/technology/map.technology" importTypeName="TECHNOLOGY"/>
+  <contexts name="policyManagement" qualifiedName="policyManagement">
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.AddressDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="streetAddress" qualifiedName="policyManagement.AddressDto.streetAddress">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="postalCode" qualifiedName="policyManagement.AddressDto.postalCode">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="city" qualifiedName="policyManagement.AddressDto.city">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerId">
+      <aspects name="Embeddable" import="//@imports.0"/>
+      <aspects name="MADR" import="//@imports.1">
+        <properties name="value" type="int"/>
+        <properties name="title" type="string"/>
+        <properties name="contextAndProblem" type="string"/>
+        <properties name="alternatives" type="string"/>
+        <properties name="chosenAlternative" type="string"/>
+        <properties name="justification" type="string"/>
+        <propertyValues value="2" property="//@contexts.0/@complexTypes.1/@aspects.1/@properties.0"/>
+        <propertyValues value="Separation between domain data model and infrastructure data model" property="//@contexts.0/@complexTypes.1/@aspects.1/@properties.1"/>
+        <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;JPA / Spring Data annotations usually belong into a separate data model in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.1/@aspects.1/@properties.2"/>
+        <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;Keep the JPA / Spring Data annotations in the domain data model,&#xA;&#x9;&#x9;&#x9;&#x9;Implement a separate data model with JPA / Spring Data annotations in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.1/@aspects.1/@properties.3"/>
+        <propertyValues value="Keep the JPA / Spring Data annotations in the domain data model" property="//@contexts.0/@complexTypes.1/@aspects.1/@properties.4"/>
+        <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;The relatively small size of this application does not warrant the additional&#xA;&#x9;&#x9;&#x9;&#x9;complexity (yet).&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.1/@aspects.1/@properties.5"/>
+      </aspects>
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="id" qualifiedName="policyManagement.CustomerId.id">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerDto">
+      <aspects name="ResourceSupport" import="//@imports.0"/>
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="customerId" qualifiedName="policyManagement.CustomerDto.customerId">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="customerProfile" qualifiedName="policyManagement.CustomerDto.customerProfile">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerProfileDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerProfileDto"/>
+        <aspects name="JsonUnwrapped" import="//@imports.0"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerIdDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerIdDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="id" qualifiedName="policyManagement.CustomerIdDto.id">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerProfileDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerProfileDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="firstname" qualifiedName="policyManagement.CustomerProfileDto.firstname">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastname" qualifiedName="policyManagement.CustomerProfileDto.lastname">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="birthday" qualifiedName="policyManagement.CustomerProfileDto.birthday">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Date" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Date" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="currentAddress" qualifiedName="policyManagement.CustomerProfileDto.currentAddress">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.AddressDto"/>
+        <aspects name="JsonUnwrapped" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="email" qualifiedName="policyManagement.CustomerProfileDto.email">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="phoneNumber" qualifiedName="policyManagement.CustomerProfileDto.phoneNumber">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="moveHistory" qualifiedName="policyManagement.CustomerProfileDto.moveHistory">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Addresses" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Addresses"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomersDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomersDto">
+      <aspects name="ResourceSupport" import="//@imports.0"/>
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="customers" qualifiedName="policyManagement.CustomersDto.customers">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Customers" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Customers"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PaginatedCustomerResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PaginatedCustomerResponseDto">
+      <aspects name="ResourceSupport" import="//@imports.0"/>
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="filter" qualifiedName="policyManagement.PaginatedCustomerResponseDto.filter">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="limit" qualifiedName="policyManagement.PaginatedCustomerResponseDto.limit">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Integer" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Integer" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="offset" qualifiedName="policyManagement.PaginatedCustomerResponseDto.offset">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Integer" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Integer" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="size" qualifiedName="policyManagement.PaginatedCustomerResponseDto.size">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Integer" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Integer" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="customers" qualifiedName="policyManagement.PaginatedCustomerResponseDto.customers">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Customers" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Customers"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="InsuringAgreementEntity" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.InsuringAgreementEntity">
+      <aspects name="Table" import="//@imports.0">
+        <properties name="name" type="string"/>
+        <propertyValues value="insuringagreements" property="//@contexts.0/@complexTypes.7/@aspects.0/@properties.0"/>
+      </aspects>
+      <featureNames>ENTITY</featureNames>
+      <dataFields name="id" qualifiedName="policyManagement.InsuringAgreementEntity.id">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="agreementItems" qualifiedName="policyManagement.InsuringAgreementEntity.agreementItems" immutable="true">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="InsuringAgreementItems" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.InsuringAgreementItems"/>
+        <aspects name="OneToMany" import="//@imports.0">
+          <properties name="cascade" type="string" defaultValue="ALL"/>
+          <properties name="fetch" type="string"/>
+        </aspects>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="InsuringAgreementItem" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.InsuringAgreementItem">
+      <aspects name="Table" import="//@imports.0">
+        <properties name="name" type="string"/>
+        <propertyValues value="insuranceagreementitems" property="//@contexts.0/@complexTypes.8/@aspects.0/@properties.0"/>
+      </aspects>
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="id" qualifiedName="policyManagement.InsuringAgreementItem.id" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="title" qualifiedName="policyManagement.InsuringAgreementItem.title" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="policyManagement.InsuringAgreementItem.description" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="MoneyAmount" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.MoneyAmount">
+      <aspects name="Embeddable" import="//@imports.0"/>
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="amount" qualifiedName="policyManagement.MoneyAmount.amount" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="BigDecimal" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.BigDecimal" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="currency" qualifiedName="policyManagement.MoneyAmount.currency" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Currency" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Currency" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PolicyAggregateRoot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyAggregateRoot">
+      <aspects name="Table" import="//@imports.0">
+        <properties name="name" type="string"/>
+        <propertyValues value="insurancepolicies" property="//@contexts.0/@complexTypes.10/@aspects.0/@properties.0"/>
+      </aspects>
+      <aspects name="MADR" import="//@imports.1">
+        <properties name="value" type="int"/>
+        <properties name="title" type="string"/>
+        <properties name="contextAndProblem" type="string"/>
+        <properties name="alternatives" type="string"/>
+        <properties name="chosenAlternative" type="string"/>
+        <properties name="justification" type="string"/>
+        <propertyValues value="2" property="//@contexts.0/@complexTypes.10/@aspects.1/@properties.0"/>
+        <propertyValues value="Separation between domain data model and infrastructure data model" property="//@contexts.0/@complexTypes.10/@aspects.1/@properties.1"/>
+        <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;JPA / Spring Data annotations usually belong into a separate data model in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.10/@aspects.1/@properties.2"/>
+        <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;Keep the JPA / Spring Data annotations in the domain data model,&#xA;&#x9;&#x9;&#x9;&#x9;Implement a separate data model with JPA / Spring Data annotations in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.10/@aspects.1/@properties.3"/>
+        <propertyValues value="Keep the JPA / Spring Data annotations in the domain data model" property="//@contexts.0/@complexTypes.10/@aspects.1/@properties.4"/>
+        <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;The relatively small size of this application does not warrant the additional&#xA;&#x9;&#x9;&#x9;&#x9;complexity (yet).&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.10/@aspects.1/@properties.5"/>
+      </aspects>
+      <featureNames>ENTITY</featureNames>
+      <featureNames>AGGREGATE</featureNames>
+      <dataFields name="id" qualifiedName="policyManagement.PolicyAggregateRoot.id" immutable="true">
+        <featureNames>IDENTIFIER</featureNames>
+        <featureNames>PART</featureNames>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyId"/>
+        <aspects name="EmbeddedId" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="customerId" qualifiedName="policyManagement.PolicyAggregateRoot.customerId" immutable="true">
+        <featureNames>PART</featureNames>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerId"/>
+        <aspects name="Embedded" import="//@imports.0"/>
+        <aspects name="AttributeOverrideColumn" import="//@imports.0">
+          <properties name="name" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <properties name="column" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="id" property="//@contexts.0/@complexTypes.10/@dataFields.1/@aspects.1/@properties.0"/>
+          <propertyValues value="customerId" property="//@contexts.0/@complexTypes.10/@dataFields.1/@aspects.1/@properties.1"/>
+        </aspects>
+      </dataFields>
+      <dataFields name="FIELD_CREATION_DATE" qualifiedName="policyManagement.PolicyAggregateRoot.FIELD_CREATION_DATE" immutable="true" initializationValue="creationDate">
+        <initializationValueCompatibleTypes name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Constant" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="creationDate" qualifiedName="policyManagement.PolicyAggregateRoot.creationDate" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Date" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Date" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="policyPeriod" qualifiedName="policyManagement.PolicyAggregateRoot.policyPeriod" immutable="true">
+        <featureNames>PART</featureNames>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyPeriod" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyPeriod"/>
+        <aspects name="Embedded" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="policyType" qualifiedName="policyManagement.PolicyAggregateRoot.policyType" immutable="true">
+        <featureNames>PART</featureNames>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyType" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyType"/>
+        <aspects name="Embedded" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="policyLimit" qualifiedName="policyManagement.PolicyAggregateRoot.policyLimit" immutable="true">
+        <featureNames>PART</featureNames>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="MoneyAmount" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.MoneyAmount"/>
+        <aspects name="Embedded" import="//@imports.0"/>
+        <aspects name="AttributeOverrideColumn" import="//@imports.0">
+          <properties name="name" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <properties name="column" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="amount" property="//@contexts.0/@complexTypes.10/@dataFields.6/@aspects.1/@properties.0"/>
+          <propertyValues value="limitAmount" property="//@contexts.0/@complexTypes.10/@dataFields.6/@aspects.1/@properties.1"/>
+        </aspects>
+        <aspects name="AttributeOverrideColumn" import="//@imports.0">
+          <properties name="name" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <properties name="column" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="currency" property="//@contexts.0/@complexTypes.10/@dataFields.6/@aspects.2/@properties.0"/>
+          <propertyValues value="limitCurrency" property="//@contexts.0/@complexTypes.10/@dataFields.6/@aspects.2/@properties.1"/>
+        </aspects>
+      </dataFields>
+      <dataFields name="insurancePremium" qualifiedName="policyManagement.PolicyAggregateRoot.insurancePremium" immutable="true">
+        <featureNames>PART</featureNames>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="MoneyAmount" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.MoneyAmount"/>
+        <aspects name="Embedded" import="//@imports.0"/>
+        <aspects name="AttributeOverrideColumn" import="//@imports.0">
+          <properties name="name" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <properties name="column" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="amount" property="//@contexts.0/@complexTypes.10/@dataFields.7/@aspects.1/@properties.0"/>
+          <propertyValues value="premiumAmount" property="//@contexts.0/@complexTypes.10/@dataFields.7/@aspects.1/@properties.1"/>
+        </aspects>
+        <aspects name="AttributeOverrideColumn" import="//@imports.0">
+          <properties name="name" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <properties name="column" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="currency" property="//@contexts.0/@complexTypes.10/@dataFields.7/@aspects.2/@properties.0"/>
+          <propertyValues value="premiumCurrency" property="//@contexts.0/@complexTypes.10/@dataFields.7/@aspects.2/@properties.1"/>
+        </aspects>
+      </dataFields>
+      <dataFields name="insuringAgreement" qualifiedName="policyManagement.PolicyAggregateRoot.insuringAgreement" immutable="true">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="InsuringAgreementEntity" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.InsuringAgreementEntity"/>
+        <aspects name="OneToOne" import="//@imports.0">
+          <properties name="cascade" type="string" defaultValue="ALL"/>
+        </aspects>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PolicyId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyId">
+      <aspects name="Embeddable" import="//@imports.0"/>
+      <featureNames>VALUE_OBJECT</featureNames>
+      <operations name="random" qualifiedName="policyManagement.PolicyId.random">
+        <returnType>
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyId">
+            <aspects name="Embeddable" import="//@imports.0"/>
+          </originalType>
+        </returnType>
+      </operations>
+      <dataFields name="id" qualifiedName="policyManagement.PolicyId.id">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PolicyPeriod" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyPeriod">
+      <aspects name="Embeddable" import="//@imports.0"/>
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="startDate" qualifiedName="policyManagement.PolicyPeriod.startDate" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Date" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Date" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="endDate" qualifiedName="policyManagement.PolicyPeriod.endDate" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Date" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Date" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PolicyType" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyType">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="name" qualifiedName="policyManagement.PolicyType.name" immutable="true">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PolicyEvent" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyEvent">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="originator" qualifiedName="policyManagement.PolicyEvent.originator">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="date" qualifiedName="policyManagement.PolicyEvent.date">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="customer" qualifiedName="policyManagement.PolicyEvent.customer">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerDto"/>
+      </dataFields>
+      <dataFields name="policy" qualifiedName="policyManagement.PolicyEvent.policy">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyDto"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CreatePolicyRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CreatePolicyRequestDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="customerId" qualifiedName="policyManagement.CreatePolicyRequestDto.customerId" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Valid" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="policyPeriod" qualifiedName="policyManagement.CreatePolicyRequestDto.policyPeriod" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Valid" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="policyType" qualifiedName="policyManagement.CreatePolicyRequestDto.policyType" immutable="true">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Valid" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="policyLimit" qualifiedName="policyManagement.CreatePolicyRequestDto.policyLimit" immutable="true">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="MoneyAmountDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.MoneyAmountDto"/>
+        <aspects name="Valid" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="insurancePremium" qualifiedName="policyManagement.CreatePolicyRequestDto.insurancePremium" immutable="true">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="MoneyAmountDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.MoneyAmountDto"/>
+        <aspects name="Valid" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="insuringAgreement" qualifiedName="policyManagement.CreatePolicyRequestDto.insuringAgreement" immutable="true">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="InsuringAgreementDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.InsuringAgreementDto"/>
+        <aspects name="Valid" import="//@imports.0"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="InsuringAgreementDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.InsuringAgreementDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="agreementItems" qualifiedName="policyManagement.InsuringAgreementDto.agreementItems" immutable="true">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="InsuringAgreementItemsDto" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.InsuringAgreementItemsDto"/>
+        <aspects name="NotNull" import="//@imports.0"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="InsuringAgreementItemDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.InsuringAgreementItemDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="title" qualifiedName="policyManagement.InsuringAgreementItemDto.title" immutable="true">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Valid" import="//@imports.0"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="policyManagement.InsuringAgreementItemDto.description" immutable="true">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Valid" import="//@imports.0"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="MoneyAmountDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.MoneyAmountDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="amount" qualifiedName="policyManagement.MoneyAmountDto.amount">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="BigDecimal" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.BigDecimal" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <aspects name="DecimalMax" import="//@imports.0">
+          <properties name="value" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <properties name="inclusive" type="boolean" defaultValue="false"/>
+          <propertyValues value="1000000000000" property="//@contexts.0/@complexTypes.18/@dataFields.0/@aspects.0/@properties.0"/>
+        </aspects>
+        <aspects name="DecimalMin" import="//@imports.0">
+          <properties name="value" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="0" property="//@contexts.0/@complexTypes.18/@dataFields.0/@aspects.1/@properties.0"/>
+        </aspects>
+      </dataFields>
+      <dataFields name="currency" qualifiedName="policyManagement.MoneyAmountDto.currency">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PolicyDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="policyId" qualifiedName="policyManagement.PolicyDto.policyId">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="customer" qualifiedName="policyManagement.PolicyDto.customer">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Object" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Object" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="creationDate" qualifiedName="policyManagement.PolicyDto.creationDate">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Date" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Date" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="policyPeriod" qualifiedName="policyManagement.PolicyDto.policyPeriod">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyPeriodDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyPeriodDto"/>
+      </dataFields>
+      <dataFields name="policyType" qualifiedName="policyManagement.PolicyDto.policyType">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="policyLimit" qualifiedName="policyManagement.PolicyDto.policyLimit">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="MoneyAmountDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.MoneyAmountDto"/>
+      </dataFields>
+      <dataFields name="insurancePremium" qualifiedName="policyManagement.PolicyDto.insurancePremium">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="MoneyAmountDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.MoneyAmountDto"/>
+      </dataFields>
+      <dataFields name="insuringAgreement" qualifiedName="policyManagement.PolicyDto.insuringAgreement">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="InsuringAgreementDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.InsuringAgreementDto"/>
+      </dataFields>
+      <dataFields name="expandable" qualifiedName="policyManagement.PolicyDto.expandable">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Strings" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Strings"/>
+        <aspects name="Array" import="//@imports.0"/>
+        <aspects name="JsonProperty" import="//@imports.0">
+          <properties name="name" type="string"/>
+          <propertyValues value="_expandable" property="//@contexts.0/@complexTypes.19/@dataFields.8/@aspects.1/@properties.0"/>
+        </aspects>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="HttpRequest" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.HttpRequest"/>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PolicyPeriodDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyPeriodDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="startDate" qualifiedName="policyManagement.PolicyPeriodDto.startDate">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="endDate" qualifiedName="policyManagement.PolicyPeriodDto.endDate">
+        <featureNames>NEVER_EMPTY</featureNames>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PaginatedPolicyResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PaginatedPolicyResponseDto">
+      <aspects name="ResourceSupport" import="//@imports.0"/>
+      <aspects name="Pagination" import="//@imports.2"/>
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="limit" qualifiedName="policyManagement.PaginatedPolicyResponseDto.limit" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Integer" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Integer" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="offset" qualifiedName="policyManagement.PaginatedPolicyResponseDto.offset" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Integer" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Integer" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="size" qualifiedName="policyManagement.PaginatedPolicyResponseDto.size" immutable="true">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Integer" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Integer" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="policies" qualifiedName="policyManagement.PaginatedPolicyResponseDto.policies">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PoliciesDto" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.PoliciesDto"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="RiskFactorRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.RiskFactorRequestDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="birthday" qualifiedName="policyManagement.RiskFactorRequestDto.birthday">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="postalCode" qualifiedName="policyManagement.RiskFactorRequestDto.postalCode">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="RiskFactorResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.RiskFactorResponseDto">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="riskFactor" qualifiedName="policyManagement.RiskFactorResponseDto.riskFactor" immutable="true">
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CustomerCoreService" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerCoreService">
+      <featureNames>INFRASTRUCTURE_SERVICE</featureNames>
+      <operations name="getCustomer" qualifiedName="policyManagement.CustomerCoreService.getCustomer">
+        <returnType>
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerDto">
+            <aspects name="ResourceSupport" import="//@imports.0"/>
+          </originalType>
+        </returnType>
+        <parameters name="customerId" qualifiedName="policyManagement.CustomerCoreService.getCustomer.customerId">
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerId">
+            <aspects name="Embeddable" import="//@imports.0"/>
+            <aspects name="MADR" import="//@imports.1">
+              <properties name="value" type="int"/>
+              <properties name="title" type="string"/>
+              <properties name="contextAndProblem" type="string"/>
+              <properties name="alternatives" type="string"/>
+              <properties name="chosenAlternative" type="string"/>
+              <properties name="justification" type="string"/>
+              <propertyValues value="2" property="//@contexts.0/@complexTypes.25/@operations.0/@parameters.0/@originalType/@aspects.1/@properties.0"/>
+              <propertyValues value="Separation between domain data model and infrastructure data model" property="//@contexts.0/@complexTypes.25/@operations.0/@parameters.0/@originalType/@aspects.1/@properties.1"/>
+              <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;JPA / Spring Data annotations usually belong into a separate data model in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.25/@operations.0/@parameters.0/@originalType/@aspects.1/@properties.2"/>
+              <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;Keep the JPA / Spring Data annotations in the domain data model,&#xA;&#x9;&#x9;&#x9;&#x9;Implement a separate data model with JPA / Spring Data annotations in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.25/@operations.0/@parameters.0/@originalType/@aspects.1/@properties.3"/>
+              <propertyValues value="Keep the JPA / Spring Data annotations in the domain data model" property="//@contexts.0/@complexTypes.25/@operations.0/@parameters.0/@originalType/@aspects.1/@properties.4"/>
+              <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;The relatively small size of this application does not warrant the additional&#xA;&#x9;&#x9;&#x9;&#x9;complexity (yet).&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.25/@operations.0/@parameters.0/@originalType/@aspects.1/@properties.5"/>
+            </aspects>
+          </originalType>
+        </parameters>
+      </operations>
+      <operations name="getCustomers" qualifiedName="policyManagement.CustomerCoreService.getCustomers">
+        <returnType>
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="PaginatedCustomerResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PaginatedCustomerResponseDto">
+            <aspects name="ResourceSupport" import="//@imports.0"/>
+          </originalType>
+        </returnType>
+        <parameters name="filter" qualifiedName="policyManagement.CustomerCoreService.getCustomers.filter">
+          <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+          <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+        <parameters name="limit" qualifiedName="policyManagement.CustomerCoreService.getCustomers.limit">
+          <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Integer" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Integer" import="//@imports.0"/>
+          <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        </parameters>
+        <parameters name="offset" qualifiedName="policyManagement.CustomerCoreService.getCustomers.offset">
+          <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Integer" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Integer" import="//@imports.0"/>
+          <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        </parameters>
+      </operations>
+      <operations name="getCustomersById" qualifiedName="policyManagement.CustomerCoreService.getCustomersById">
+        <returnType>
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="Customers" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Customers"/>
+        </returnType>
+        <parameters name="customerIds" qualifiedName="policyManagement.CustomerCoreService.getCustomersById.customerIds">
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerIds" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.CustomerIds"/>
+        </parameters>
+      </operations>
+      <dataFields name="customerCoreBaseURL" qualifiedName="policyManagement.CustomerCoreService.customerCoreBaseURL">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Value" import="//@imports.0">
+          <properties name="value" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="${customercore.baseURL}" property="//@contexts.0/@complexTypes.25/@dataFields.0/@aspects.0/@properties.0"/>
+        </aspects>
+      </dataFields>
+      <dataFields name="apiKeyHeader" qualifiedName="policyManagement.CustomerCoreService.apiKeyHeader">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Value" import="//@imports.0">
+          <properties name="value" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="${apikey.header}" property="//@contexts.0/@complexTypes.25/@dataFields.1/@aspects.0/@properties.0"/>
+        </aspects>
+      </dataFields>
+      <dataFields name="apikeyValue" qualifiedName="policyManagement.CustomerCoreService.apikeyValue">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Value" import="//@imports.0">
+          <properties name="value" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="${apikey.value}" property="//@contexts.0/@complexTypes.25/@dataFields.2/@aspects.0/@properties.0"/>
+        </aspects>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="PolicyRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyRepository">
+      <featureNames>REPOSITORY</featureNames>
+      <operations name="nextId" qualifiedName="policyManagement.PolicyRepository.nextId">
+        <returnType>
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyId">
+            <aspects name="Embeddable" import="//@imports.0"/>
+          </originalType>
+        </returnType>
+      </operations>
+      <operations name="findAllByCustomerIdOrderByCreationDateDesc" qualifiedName="policyManagement.PolicyRepository.findAllByCustomerIdOrderByCreationDateDesc">
+        <returnType>
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="Policies" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Policies"/>
+        </returnType>
+        <parameters name="customerId" qualifiedName="policyManagement.PolicyRepository.findAllByCustomerIdOrderByCreationDateDesc.customerId">
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerId">
+            <aspects name="Embeddable" import="//@imports.0"/>
+            <aspects name="MADR" import="//@imports.1">
+              <properties name="value" type="int"/>
+              <properties name="title" type="string"/>
+              <properties name="contextAndProblem" type="string"/>
+              <properties name="alternatives" type="string"/>
+              <properties name="chosenAlternative" type="string"/>
+              <properties name="justification" type="string"/>
+              <propertyValues value="2" property="//@contexts.0/@complexTypes.26/@operations.1/@parameters.0/@originalType/@aspects.1/@properties.0"/>
+              <propertyValues value="Separation between domain data model and infrastructure data model" property="//@contexts.0/@complexTypes.26/@operations.1/@parameters.0/@originalType/@aspects.1/@properties.1"/>
+              <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;JPA / Spring Data annotations usually belong into a separate data model in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.26/@operations.1/@parameters.0/@originalType/@aspects.1/@properties.2"/>
+              <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;Keep the JPA / Spring Data annotations in the domain data model,&#xA;&#x9;&#x9;&#x9;&#x9;Implement a separate data model with JPA / Spring Data annotations in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.26/@operations.1/@parameters.0/@originalType/@aspects.1/@properties.3"/>
+              <propertyValues value="Keep the JPA / Spring Data annotations in the domain data model" property="//@contexts.0/@complexTypes.26/@operations.1/@parameters.0/@originalType/@aspects.1/@properties.4"/>
+              <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;The relatively small size of this application does not warrant the additional&#xA;&#x9;&#x9;&#x9;&#x9;complexity (yet).&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.26/@operations.1/@parameters.0/@originalType/@aspects.1/@properties.5"/>
+            </aspects>
+          </originalType>
+        </parameters>
+      </operations>
+      <operations name="findFirstByCustomerIdOrderByCreationDateDesc" qualifiedName="policyManagement.PolicyRepository.findFirstByCustomerIdOrderByCreationDateDesc">
+        <returnType>
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="Policies" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Policies"/>
+          <aspects name="Optional" import="//@imports.0"/>
+        </returnType>
+        <parameters name="customerId" qualifiedName="policyManagement.PolicyRepository.findFirstByCustomerIdOrderByCreationDateDesc.customerId">
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerId">
+            <aspects name="Embeddable" import="//@imports.0"/>
+            <aspects name="MADR" import="//@imports.1">
+              <properties name="value" type="int"/>
+              <properties name="title" type="string"/>
+              <properties name="contextAndProblem" type="string"/>
+              <properties name="alternatives" type="string"/>
+              <properties name="chosenAlternative" type="string"/>
+              <properties name="justification" type="string"/>
+              <propertyValues value="2" property="//@contexts.0/@complexTypes.26/@operations.2/@parameters.0/@originalType/@aspects.1/@properties.0"/>
+              <propertyValues value="Separation between domain data model and infrastructure data model" property="//@contexts.0/@complexTypes.26/@operations.2/@parameters.0/@originalType/@aspects.1/@properties.1"/>
+              <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;JPA / Spring Data annotations usually belong into a separate data model in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.26/@operations.2/@parameters.0/@originalType/@aspects.1/@properties.2"/>
+              <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;Keep the JPA / Spring Data annotations in the domain data model,&#xA;&#x9;&#x9;&#x9;&#x9;Implement a separate data model with JPA / Spring Data annotations in the&#xA;&#x9;&#x9;&#x9;&#x9;infrastructure layer&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.26/@operations.2/@parameters.0/@originalType/@aspects.1/@properties.3"/>
+              <propertyValues value="Keep the JPA / Spring Data annotations in the domain data model" property="//@contexts.0/@complexTypes.26/@operations.2/@parameters.0/@originalType/@aspects.1/@properties.4"/>
+              <propertyValues value="&#xA;&#x9;&#x9;&#x9;&#x9;The relatively small size of this application does not warrant the additional&#xA;&#x9;&#x9;&#x9;&#x9;complexity (yet).&#xA;&#x9;&#x9;&#x9;" property="//@contexts.0/@complexTypes.26/@operations.2/@parameters.0/@originalType/@aspects.1/@properties.5"/>
+            </aspects>
+          </originalType>
+        </parameters>
+      </operations>
+      <dataFields name="policy" qualifiedName="policyManagement.PolicyRepository.policy" hidden="true">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyAggregateRoot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyAggregateRoot"/>
+      </dataFields>
+      <dataFields name="policyId" qualifiedName="policyManagement.PolicyRepository.policyId" hidden="true">
+        <featureNames>IDENTIFIER</featureNames>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyId"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="RiskManagementService" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.RiskManagementService">
+      <featureNames>INFRASTRUCTURE_SERVICE</featureNames>
+      <operations name="notifyRiskManagement" qualifiedName="policyManagement.RiskManagementService.notifyRiskManagement">
+        <parameters name="originator" qualifiedName="policyManagement.RiskManagementService.notifyRiskManagement.originator">
+          <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+          <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+        <parameters name="date" qualifiedName="policyManagement.RiskManagementService.notifyRiskManagement.date">
+          <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="Date" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Date" import="//@imports.0"/>
+          <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+        <parameters name="customer" qualifiedName="policyManagement.RiskManagementService.notifyRiskManagement.customer">
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerDto">
+            <aspects name="ResourceSupport" import="//@imports.0"/>
+          </originalType>
+        </parameters>
+        <parameters name="newPolicyDto" qualifiedName="policyManagement.RiskManagementService.notifyRiskManagement.newPolicyDto">
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyDto"/>
+        </parameters>
+      </operations>
+      <operations name="emitEvent" qualifiedName="policyManagement.RiskManagementService.emitEvent" hidden="true">
+        <parameters name="event" qualifiedName="policyManagement.RiskManagementService.emitEvent.event">
+          <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyEvent" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyEvent"/>
+        </parameters>
+      </operations>
+      <dataFields name="queueName" qualifiedName="policyManagement.RiskManagementService.queueName">
+        <type xsi:type="intermediate:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.0"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <aspects name="Value" import="//@imports.0">
+          <properties name="value" type="string">
+            <featureNames>#MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="${riskmanagement.queueName}" property="//@contexts.0/@complexTypes.27/@dataFields.0/@aspects.0/@properties.0"/>
+        </aspects>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="Addresses" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Addresses" structuredList="true">
+      <dataFields name="d" qualifiedName="policyManagement.Addresses.d">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.AddressDto"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="CustomerIds" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.CustomerIds" structuredList="true">
+      <dataFields name="i" qualifiedName="policyManagement.CustomerIds.i">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerId"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="Customers" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Customers" structuredList="true">
+      <dataFields name="d" qualifiedName="policyManagement.Customers.d">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.CustomerDto"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="InsuringAgreementItems" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.InsuringAgreementItems" structuredList="true">
+      <dataFields name="i" qualifiedName="policyManagement.InsuringAgreementItems.i">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="InsuringAgreementItem" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.InsuringAgreementItem"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="Policies" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Policies" structuredList="true">
+      <dataFields name="p" qualifiedName="policyManagement.Policies.p">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyAggregateRoot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyAggregateRoot"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="InsuringAgreementItemsDto" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.InsuringAgreementItemsDto" structuredList="true">
+      <dataFields name="d" qualifiedName="policyManagement.InsuringAgreementItemsDto.d">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="InsuringAgreementItemDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.InsuringAgreementItemDto"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="Strings" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.Strings" primitiveList="true">
+      <primitiveType name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="PoliciesDto" origin="DATA_MODEL" kind="LIST" qualifiedName="policyManagement.PoliciesDto" structuredList="true">
+      <dataFields name="d" qualifiedName="policyManagement.PoliciesDto.d">
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="PolicyDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="policyManagement.PolicyDto"/>
+      </dataFields>
+    </complexTypes>
+  </contexts>
+</intermediate:IntermediateDataModel>

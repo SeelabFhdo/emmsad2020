@@ -1,0 +1,30 @@
+/* Technology model according to
+ 
+	Zimmermann, O., Stocker, M., Lübke, D., Pautasso, C., Zdun, U.: Introduction to Microservice API
+	Patterns (MAP). In: Cruz-Filipe, L., Giallorenzo, S., Montesi, F., Peressotti, M., 
+	Rademacher, F., Sachweh, S. (eds.) Joint Post-proceedings of the First and Second International
+	Conference on Microservices (Microservices 2017/2019). OpenAccess Series in Informatics 
+	(OASIcs), vol. 78, pp. 4:1–4:17. Schloss Dagstuhl–Leibniz-Zentrum fuer Informatik, Dagstuhl, 
+	Germany (2020). https://doi.org/10.4230/OASIcs.Microservices.2017-2019.4, 
+	https://drops.dagstuhl.de/opus/volltexte/2020/11826
+
+   as employed by the LM case study microservice architecture.
+*/
+
+technology map {
+	service aspects {
+		aspect AtomicParameter for types;
+		aspect AtomicParameterList for types;
+		aspect Pagination for types;
+		aspect ParameterForest for types;
+		aspect ParameterTree for types;
+
+		aspect ComputationFunction for interfaces;
+		aspect InformationHolderResource for interfaces;
+		aspect MasterDataHolder <singleval> for interfaces;
+		aspect StaticDataHolder for interfaces;
+
+		aspect RequestBundle for operations;
+		aspect WishList for operations;
+	}
+}

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateServiceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/service/intermediate" xmlns:intermediate_1="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file:///home/florian/Dokumente/Forschung/Paper/Eigene/EMMSAD 2020/validation/Reconstruction Models/customer-self-service-backend/customerSelfServiceBackend.services">
+  <imports name="customerSelfServiceBackend" importUri="file:///home/florian/Dokumente/Forschung/Paper/Eigene/EMMSAD 2020/validation/Reconstruction Models/intermediate/data models/customerSelfServiceBackend.xmi" importTypeName="DATATYPES"/>
+  <imports name="customerCoreServices" importUri="file:///home/florian/Dokumente/Forschung/Paper/Eigene/EMMSAD 2020/validation/Reconstruction Models/intermediate/service models/customerCore.xmi" importTypeName="MICROSERVICES"/>
+  <microservices sourceModelUri="file:///home/florian/Dokumente/Forschung/Paper/Eigene/EMMSAD 2020/validation/Reconstruction Models/customer-self-service-backend/customerSelfServiceBackend.services" name="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend" visibility="ARCHITECTURE" effectivelyImplemented="true">
+    <requiredMicroservices name="com.lakesidemutual.customercore.CustomerCore" qualifiedName="com.lakesidemutual.customercore.CustomerCore" imported="true" import="//@imports.1"/>
+    <interfaces name="authenticationController" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.authenticationController" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <operations name="authenticationRequest" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.authenticationController.authenticationRequest" visibility="ARCHITECTURE">
+        <apiOperationComment comment="Authenticate a user based on a given email address and password.">
+          <parameterComments comment="the email and password used to authenticate the user" required="true" parameter="//@microservices.0/@interfaces.0/@operations.0/@parameters.0"/>
+        </apiOperationComment>
+        <parameters name="authenticationRequest" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.authenticationController.authenticationRequest.authenticationRequest">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="AuthenticationRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AuthenticationRequestDto" import="//@imports.0"/>
+        </parameters>
+        <parameters name="authenticationResponse" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.authenticationController.authenticationRequest.authenticationResponse" exchangePattern="OUT">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="AuthenticationResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AuthenticationResponseDto" import="//@imports.0"/>
+        </parameters>
+        <parameters name="authenticationException" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.authenticationController.authenticationRequest.authenticationException" exchangePattern="OUT" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="AuthenticationError" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AuthenticationError" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="signupUser" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.authenticationController.signupUser" visibility="ARCHITECTURE">
+        <apiOperationComment comment="Create a new user.">
+          <parameterComments comment="the email and password used to create a new user" required="true" parameter="//@microservices.0/@interfaces.0/@operations.1/@parameters.0"/>
+        </apiOperationComment>
+        <parameters name="registration" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.authenticationController.signupUser.registration">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="SignupRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.SignupRequestDto" import="//@imports.0"/>
+        </parameters>
+        <parameters name="userResponse" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.authenticationController.signupUser.userResponse" exchangePattern="OUT">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="UserResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserResponseDto" import="//@imports.0"/>
+        </parameters>
+        <parameters name="userAlreadyExists" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.authenticationController.signupUser.userAlreadyExists" exchangePattern="OUT" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <interfaces name="cityStaticDataHolder" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.cityStaticDataHolder" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <operations name="getCitiesForPostalCode" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.cityStaticDataHolder.getCitiesForPostalCode" visibility="ARCHITECTURE">
+        <apiOperationComment comment="Get the cities for a particular postal code.">
+          <parameterComments comment="the postal code" required="true" parameter="//@microservices.0/@interfaces.1/@operations.0/@parameters.0"/>
+        </apiOperationComment>
+        <parameters name="postcalCode" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.cityStaticDataHolder.getCitiesForPostalCode.postcalCode">
+          <type xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+        <parameters name="result" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.cityStaticDataHolder.getCitiesForPostalCode.result" exchangePattern="OUT">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CitiesResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CitiesResponseDto" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <interfaces name="customerInformationHolder" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <operations name="changeAddress" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.changeAddress" visibility="ARCHITECTURE">
+        <apiOperationComment comment="Change a customer's address.">
+          <parameterComments comment="the customer's unique id" required="true" parameter="//@microservices.0/@interfaces.2/@operations.0/@parameters.0"/>
+          <parameterComments comment="the customer's new address" required="true" parameter="//@microservices.0/@interfaces.2/@operations.0/@parameters.1"/>
+        </apiOperationComment>
+        <parameters name="customerId" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.changeAddress.customerId">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerId" import="//@imports.0"/>
+        </parameters>
+        <parameters name="requestDto" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.changeAddress.requestDto">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AddressDto" import="//@imports.0"/>
+        </parameters>
+        <parameters name="result" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.changeAddress.result" exchangePattern="OUT">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="AddressDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.AddressDto" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="getCustomer" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.getCustomer" visibility="ARCHITECTURE">
+        <apiOperationComment comment="Get customer with a given customer id.">
+          <parameterComments comment="the customer's unique id" required="true" parameter="//@microservices.0/@interfaces.2/@operations.1/@parameters.0"/>
+        </apiOperationComment>
+        <parameters name="customerId" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.getCustomer.customerId">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CustomerId" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerId" import="//@imports.0"/>
+        </parameters>
+        <parameters name="result" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.getCustomer.result" exchangePattern="OUT">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerDto" import="//@imports.0"/>
+        </parameters>
+        <parameters name="customerNotFound" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.getCustomer.customerNotFound" exchangePattern="OUT" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+      </operations>
+      <operations name="registerCustomer" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.registerCustomer" visibility="ARCHITECTURE">
+        <apiOperationComment comment="Complete the registration of a new customer.">
+          <parameterComments comment="the customer's profile information" required="true" parameter="//@microservices.0/@interfaces.2/@operations.2/@parameters.0"/>
+        </apiOperationComment>
+        <parameters name="requestDto" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.registerCustomer.requestDto">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CustomerRegistrationRequestDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerRegistrationRequestDto" import="//@imports.0"/>
+        </parameters>
+        <parameters name="result" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.customerInformationHolder.registerCustomer.result" exchangePattern="OUT">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CustomerDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.CustomerDto" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <interfaces name="userInformationHolder" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.userInformationHolder" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <operations name="getCurrentUser" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.userInformationHolder.getCurrentUser" visibility="ARCHITECTURE">
+        <apiOperationComment comment="Get the user details for the currently logged-in user."/>
+        <parameters name="response" qualifiedName="com.lakesidemutual.customerselfservice.CustomerSelfServiceBackend.userInformationHolder.getCurrentUser.response" exchangePattern="OUT">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="UserResponseDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="customerSelfService.UserResponseDto" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+  </microservices>
+</intermediate:IntermediateServiceModel>

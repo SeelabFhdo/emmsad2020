@@ -1,0 +1,186 @@
+DDD feature overview for domain model ../Reconstruction Models/intermediate/mapping models/customerCore/customerCore_customerCore.xmi
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+# of feature VALUE_OBJECT: 8
+# of feature ENTITY: 2
+# of feature AGGREGATE: 1
+# of feature FACTORY: 1
+# of feature REPOSITORY: 1
+# of feature APPLICATION_SERVICE: 1
+# of feature DOMAIN_SERVICE: 1
+----------------------------------------------------------------------------------------------------
+# of features in Bounded Context customer:
+	# of feature VALUE_OBJECT: 8
+	# of feature ENTITY: 2
+	# of feature AGGREGATE: 1
+	# of feature FACTORY: 1
+	# of feature REPOSITORY: 1
+	# of feature APPLICATION_SERVICE: 1
+	# of feature DOMAIN_SERVICE: 1
+----------------------------------------------------------------------------------------------------
+DDD feature overview for domain model ../Reconstruction Models/intermediate/mapping models/customerManagement/customerManagement_customerManagement.xmi
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+# of feature VALUE_OBJECT: 10
+# of feature ENTITY: 2
+# of feature AGGREGATE: 1
+# of feature DOMAIN_SERVICE: 1
+# of feature INFRASTRUCTURE_SERVICE: 1
+# of feature REPOSITORY: 1
+----------------------------------------------------------------------------------------------------
+# of features in Bounded Context customerManagement:
+	# of feature VALUE_OBJECT: 10
+	# of feature ENTITY: 2
+	# of feature AGGREGATE: 1
+	# of feature DOMAIN_SERVICE: 1
+	# of feature INFRASTRUCTURE_SERVICE: 1
+	# of feature REPOSITORY: 1
+----------------------------------------------------------------------------------------------------
+DDD feature overview for domain model ../Reconstruction Models/intermediate/mapping models/customerSelfServiceBackend/customerSelfServiceBackend_customerSelfServiceBackend.xmi
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+# of feature VALUE_OBJECT: 13
+# of feature ENTITY: 1
+# of feature DOMAIN_SERVICE: 1
+# of feature INFRASTRUCTURE_SERVICE: 1
+# of feature REPOSITORY: 1
+----------------------------------------------------------------------------------------------------
+# of features in Bounded Context customerSelfService:
+	# of feature VALUE_OBJECT: 13
+	# of feature ENTITY: 1
+	# of feature DOMAIN_SERVICE: 1
+	# of feature INFRASTRUCTURE_SERVICE: 1
+	# of feature REPOSITORY: 1
+----------------------------------------------------------------------------------------------------
+DDD feature overview for domain model ../Reconstruction Models/intermediate/mapping models/policyManagementBackend/policyManagementBackend_policyManagementBackend.xmi
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+# of feature VALUE_OBJECT: 22
+# of feature ENTITY: 2
+# of feature AGGREGATE: 1
+# of feature DOMAIN_EVENT: 1
+# of feature INFRASTRUCTURE_SERVICE: 2
+# of feature REPOSITORY: 1
+----------------------------------------------------------------------------------------------------
+# of features in Bounded Context policyManagement:
+	# of feature VALUE_OBJECT: 22
+	# of feature ENTITY: 2
+	# of feature AGGREGATE: 1
+	# of feature DOMAIN_EVENT: 1
+	# of feature INFRASTRUCTURE_SERVICE: 2
+	# of feature REPOSITORY: 1
+----------------------------------------------------------------------------------------------------
+Overview for domain model ../Reconstruction Models/intermediate/mapping models/customerCore/customerCore_customerCore.xmi
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+# Bounded Contexts: 1
+----------------------------------------------------------------------------------------------------
+# Structures per Bounded Context:
+	customer: 14
+	
+# Structures in all Bounded Contexts: 14
+# of all structures in domain model 14
+----------------------------------------------------------------------------------------------------
+List count per Bounded Context:
+	customer: 6
+	
+# Lists in all Bounded Contexts: 6
+# of all lists in domain model 6
+----------------------------------------------------------------------------------------------------
+Enumeration count per Bounded Context:
+	customer: 0
+	
+# Enumerations in all Bounded Contexts: 0
+# of all enumerations in domain model 0
+----------------------------------------------------------------------------------------------------
+Overview for domain model ../Reconstruction Models/intermediate/mapping models/customerManagement/customerManagement_customerManagement.xmi
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+# Bounded Contexts: 1
+----------------------------------------------------------------------------------------------------
+# Structures per Bounded Context:
+	customerManagement: 15
+	
+# Structures in all Bounded Contexts: 15
+# of all structures in domain model 15
+----------------------------------------------------------------------------------------------------
+List count per Bounded Context:
+	customerManagement: 4
+	
+# Lists in all Bounded Contexts: 4
+# of all lists in domain model 4
+----------------------------------------------------------------------------------------------------
+Enumeration count per Bounded Context:
+	customerManagement: 0
+	
+# Enumerations in all Bounded Contexts: 0
+# of all enumerations in domain model 0
+----------------------------------------------------------------------------------------------------
+Overview for domain model ../Reconstruction Models/intermediate/mapping models/customerSelfServiceBackend/customerSelfServiceBackend_customerSelfServiceBackend.xmi
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+# Bounded Contexts: 1
+----------------------------------------------------------------------------------------------------
+# Structures per Bounded Context:
+	customerSelfService: 19
+	
+# Structures in all Bounded Contexts: 19
+# of all structures in domain model 19
+----------------------------------------------------------------------------------------------------
+List count per Bounded Context:
+	customerSelfService: 5
+	
+# Lists in all Bounded Contexts: 5
+# of all lists in domain model 5
+----------------------------------------------------------------------------------------------------
+Enumeration count per Bounded Context:
+	customerSelfService: 0
+	
+# Enumerations in all Bounded Contexts: 0
+# of all enumerations in domain model 0
+----------------------------------------------------------------------------------------------------
+Overview for domain model ../Reconstruction Models/intermediate/mapping models/policyManagementBackend/policyManagementBackend_policyManagementBackend.xmi
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+# Bounded Contexts: 1
+----------------------------------------------------------------------------------------------------
+# Structures per Bounded Context:
+	policyManagement: 28
+	
+# Structures in all Bounded Contexts: 28
+# of all structures in domain model 28
+----------------------------------------------------------------------------------------------------
+List count per Bounded Context:
+	policyManagement: 8
+	
+# Lists in all Bounded Contexts: 8
+# of all lists in domain model 8
+----------------------------------------------------------------------------------------------------
+Enumeration count per Bounded Context:
+	policyManagement: 0
+	
+# Enumerations in all Bounded Contexts: 0
+# of all enumerations in domain model 0
+----------------------------------------------------------------------------------------------------
+####################################################################################################
+RESULT SUMMARY (domain analysis)
+####################################################################################################
+####################################################################################################
+DDD feature overview for domain models:
+	# of feature VALUE_OBJECT: 53
+	# of feature ENTITY: 7
+	# of feature AGGREGATE: 3
+	# of feature FACTORY: 1
+	# of feature REPOSITORY: 4
+	# of feature APPLICATION_SERVICE: 1
+	# of feature DOMAIN_SERVICE: 3
+	# of feature INFRASTRUCTURE_SERVICE: 4
+	# of feature DOMAIN_EVENT: 1
+----------------------------------------------------------------------------------------------------
+Overview of domain models:
+	# Bounded Contexts: 4
+	# of all structures in all domain models: 76
+	# of all lists in all domain models: 23
+	# of all enumerations in all domain models: 0
+----------------------------------------------------------------------------------------------------
+####################################################################################################
